@@ -20,3 +20,7 @@ tested in the latest versions of Chrome, Safari, Firefox, and IE.
 * something like flickr's justified layout http://code.flickr.net/2016/04/05/our-justified-layout-goes-open-source/
 * infinite scroll list
 * preload large images so clicking right or left in the lightbox mode doesn't take too long
+
+##demo
+
+https://erikswedberg.github.io/lightbox/
