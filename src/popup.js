@@ -33,7 +33,6 @@ class Popup {
 
   init(data) {
     Object.assign(this, data);
-    // console.log(this);
     this.render();
   }
 

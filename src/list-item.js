@@ -14,7 +14,6 @@ class ListItem {
 
   init(data) {
     Object.assign(this, data);
-    // console.log(this);
     this.render();
   }
 
@@ -33,7 +32,6 @@ class ListItem {
     this.containerNode.insertAdjacentHTML('beforeend', this.template);
     this.domNode = this.containerNode.querySelector(`.list-item[data-id="${this.photo.id}"]`);
     
-    // console.log(this.domNode);
     this.postRender();
   }
 
