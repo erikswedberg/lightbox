@@ -14,6 +14,7 @@ class List {
     this.domNode = null;
     this.template = null;
     this.listItems = {};
+    this.photos = [];
     this.popup = new Popup();
     this.total = null;
   }
@@ -41,7 +42,7 @@ class List {
       const listItem = utility.findClassInParents(e.target, 'list-item', this.domNode);
       if (listItem !== undefined) {
         e.stopPropagation();
-        this.showLightbox(this.listItems[listItem.dataset.id]);
+        this.showLightbox(parseInt(listItem.dataset.index, 10));
       }
     });
     
@@ -81,12 +82,13 @@ class List {
   initPhotos(data) {
     if ('photos' in data && 'photo' in data['photos']) {
       // add a list item per photo in the result data
-      console.log(data['photos']);
       data['photos']['photo'].forEach(
-        (photo, index) => {
+        (photo, i) => {
           const listItem = new ListItem();
+          const index = (data['photos']['page'] * (i + 1)) - 1;
           listItem.init({ photo, index, containerNode: this.domNode.querySelector('.thumb-list-a') });
           this.listItems[photo['id']] = listItem;
+          this.photos[index] = photo;
         }
       );
     }
@@ -95,10 +97,9 @@ class List {
     }
   }
   
-  showLightbox(listItem) {
-    console.log('show lightbox', listItem);
+  showLightbox(index) {
     this.popup.init({ id: utility.unique('popup_') });
-    this.popup.show({ photo: listItem.photo, index: listItem.index, total: this.total });
+    this.popup.show({ photos: this.photos, index, total: this.total });
   }
 }
 

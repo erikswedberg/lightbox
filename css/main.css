@@ -130,6 +130,7 @@ body.popup-on .popup-mask {
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
 }
 .popup-close:hover {
   box-shadow: 0px 0px 5px 2px rgba(255,255,255,0.5);
@@ -137,11 +138,26 @@ body.popup-on .popup-mask {
 .lightbox-cont {
   line-height: 0;
 }
-
+.popup-content:hover .lightbox-title {
+  transition: opacity 0.3s, visibility 0.3s;
+  visibility: visible;
+  opacity: 1;
+}
+.lightbox-title {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  color: #fff;
+  font-size: 18px;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
 .popup-content:hover .popup-controls {
   transition: opacity 0.3s, visibility 0.3s;
   visibility: visible;
-  opacity: 0.7;
+  opacity: 1;
 }
 .popup-controls {
   position: absolute;
@@ -160,6 +176,12 @@ body.popup-on .popup-mask {
 .popup-controls-cont-cont {
   display: table-row;
 }
+.popup-content.first .popup-controls .left {
+  visibility: hidden !important;
+}
+.popup-content.last .popup-controls .right {
+  visibility: hidden !important;
+}
 .popup-controls .left {
   display: table-cell;
   vertical-align: middle;
@@ -174,9 +196,27 @@ body.popup-on .popup-mask {
 }
 .popup-controls .left a {
   float: left;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.popup-controls .left a:hover {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.popup-controls .left a:hover > span {
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
 }
 .popup-controls .right a {
   float: right;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.popup-controls .right a:hover {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.popup-controls .right a:hover > span {
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
 }
 .popup-controls .left > a > span {
   color: #fff;
@@ -189,7 +229,6 @@ body.popup-on .popup-mask {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   text-shadow: 0px 0px 15px rgb(119, 119, 119);
-  background: red;
   line-height: 1.7em;
 }
 
@@ -204,6 +243,5 @@ body.popup-on .popup-mask {
   -webkit-transform: rotate(225deg);
   transform: rotate(225deg);
   text-shadow: 0px 0px 15px rgb(119, 119, 119);
-  background: red;
   line-height: 1.7em;
 }

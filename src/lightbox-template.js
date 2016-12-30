@@ -13,6 +13,9 @@ class LightboxTemplate {
       <div class="lightbox-cont">
         <img src="${data.url}" height="${data.height}" width="${data.width}" alt="${data.title}" />
       </div>
+      <div class="lightbox-title">
+        ${data.title}
+      </div>
     `;
     return this.template;
   }

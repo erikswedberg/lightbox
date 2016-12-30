@@ -16,13 +16,16 @@ class Popup {
     this.bodyNode = null;
     this.contentNode = null;
     this.containerNode = null;
-    
+    this.leftNode = null;
+    this.rightNode = null;
+
     // templates
     this.template = null;
     this.lightboxTemplate = null;
 
     // other properties
     this.index = null;
+    this.photos = [];
     this.photo = null;
     this.total = null;
     this.openFlag = false;
@@ -51,8 +54,8 @@ class Popup {
       this.bodyNode.id = bodyId;
       this.contentNode = this.domNode.querySelector('.popup-content');
       this.containerNode = this.domNode.querySelector('.popup-cont');
-    } else {
-      console.log('re-render');
+      this.leftNode = this.domNode.querySelector('.popup-controls .left');
+      this.rightNode = this.domNode.querySelector('.popup-controls .right');
     }
       
     this.postRender();
@@ -83,22 +86,50 @@ class Popup {
       }
     });
 
-    // keys to close
+    // keys to close and right and left arrows
     document.addEventListener('keyup', (e) => {
       if (this.openFlag) {
+        // esc, space, return
         if (e.keyCode === 13 || e.keyCode === 27 || e.keyCode === 32) {
           this.close();
         }
+        // left
+        if (e.keyCode === 37) {
+          this.prev();
+        }
+        // right
+        if (e.keyCode === 39) {
+          this.next();
+        }
       }
+    });
+    
+    // arrows
+    this.leftNode.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.prev();
+    });
+    this.rightNode.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.next();
     });
   }
   
   reRender(data) {
+    // fast-remove all child elements
+    while (this.bodyNode.firstChild) {
+      this.bodyNode.removeChild(this.bodyNode.firstChild);
+    }
     this.index = data.index;
-    this.photo = data.photo;
-    this.total = data.total;
+    if ('photos' in data) {
+      this.photos = data.photos;
+    }
+    if ('total' in data) {
+      this.total = data.total;
+    }
+    this.photo = this.photos[this.index];
     const context = {
-      title: this.title, 
+      title: this.photo['title'], 
       url: this.photo['url_l'],
       index: this.index,
       total: this.total,
@@ -107,6 +138,18 @@ class Popup {
     };
     this.lightboxTemplate = lightboxTemplate.renderTemplate(context);
     this.bodyNode.innerHTML = this.lightboxTemplate;
+    
+    // class toggles to show/hide first and last arrows at ends of list
+    if (this.index === 0) {
+      this.contentNode.classList.add('first');
+    } else {
+      this.contentNode.classList.remove('first');
+    }
+    if (this.index === this.photos.length - 1) {
+      this.contentNode.classList.add('last');
+    } else {
+      this.contentNode.classList.remove('last');
+    }
   }
 
   show(data) {
@@ -120,9 +163,17 @@ class Popup {
     this.domNode.classList.remove('shown');
     document.body.classList.remove('popup-on');
     this.openFlag = true;
-    // fast-remove all child elements
-    while (this.bodyNode.firstChild) {
-      this.bodyNode.removeChild(this.bodyNode.firstChild);
+  }
+  
+  prev() {
+    if (this.index > 0) {
+      this.reRender({ index: this.index - 1 });
+    }
+  }
+  
+  next() {
+    if (this.index < this.photos.length - 1) {
+      this.reRender({ index: this.index + 1 });
     }
   }
   
