@@ -51,11 +51,6 @@ body, html {
 }
 
 .popup-content {
-  /*background: white;
-  min-width: 250px;
-  min-height: 500px;
-  max-width: 700px;
-  padding: 20px;*/
   display: inline-block;
   position: relative;
   -webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.3);
@@ -99,17 +94,10 @@ body.popup-on .popup-mask {
   width: 100%;
 }
 .popup-dialog {
-  /*min-width: 250px;
-  max-width: 500px;*/
   margin: auto;
   text-align: center;
 }
-.popup-close {
-  
-  /*font-size: smaller;
-  color: #B6B6B4;
-  text-decoration: none;*/
-}
+
 .popup-close:hover { 
   text-decoration: underline;
 }
@@ -117,13 +105,6 @@ body.popup-on .popup-mask {
   font-size: 36px;
   line-height: 1em;
   margin: 0;
-}
-.popup-content a {
-  /*text-decoration: none;
-  color: skyblue;*/
-}
-.popup-content a:hover {
-  /*text-decoration: underline;*/
 }
 .popup-content:hover .popup-close {
   transition: opacity 0.3s, visibility 0.3s;
@@ -155,4 +136,74 @@ body.popup-on .popup-mask {
 }
 .lightbox-cont {
   line-height: 0;
+}
+
+.popup-content:hover .popup-controls {
+  transition: opacity 0.3s, visibility 0.3s;
+  visibility: visible;
+  opacity: 0.7;
+}
+.popup-controls {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.popup-controls-cont {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.popup-controls-cont-cont {
+  display: table-row;
+}
+.popup-controls .left {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  width: 50%;
+}
+.popup-controls .right {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  width: 50%;
+}
+.popup-controls .left a {
+  float: left;
+}
+.popup-controls .right a {
+  float: right;
+}
+.popup-controls .left > a > span {
+  color: #fff;
+  display: inline-block;
+  width: 87px;
+  height: 87px;
+  border-radius:50%;
+  font-size: 51px;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  text-shadow: 0px 0px 15px rgb(119, 119, 119);
+  background: red;
+  line-height: 1.7em;
+}
+
+.popup-controls .right > a > span {
+  color: #fff;
+  display: inline-block;
+  width: 87px;
+  height: 87px;
+  border-radius:50%;
+  font-size: 51px;
+  -moz-transform: rotate(225deg);
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  text-shadow: 0px 0px 15px rgb(119, 119, 119);
+  background: red;
+  line-height: 1.7em;
 }

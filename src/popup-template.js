@@ -22,6 +22,14 @@ class PopupTemplate {
                 <div class="popup-body">
                   ${data.body}
                 </div>
+                <div class="popup-controls">
+                  <div class="popup-controls-cont">
+                    <div class="popup-controls-cont-cont">
+                      <div class="left"><a href="#"><span>&#x25E3;</span></a></div>
+                      <div class="right"><a href="#"><span>&#x25E3;</span></a></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
