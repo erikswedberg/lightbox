@@ -55,9 +55,9 @@ class Popup {
       this.containerNode = this.domNode.querySelector('.popup-cont');
       this.leftNode = this.domNode.querySelector('.popup-controls .left');
       this.rightNode = this.domNode.querySelector('.popup-controls .right');
+
+      this.postRender();
     }
-      
-    this.postRender();
   }
 
   postRender() {
