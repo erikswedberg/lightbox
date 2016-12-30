@@ -8,11 +8,10 @@ class ListTemplate {
     this.template = null;
   }
 
-  renderTemplate(data) {
+  renderTemplate() {
     this.template = utility.SaferHTML`
       <div class="list">
-        <ul>
-          <li>${data.name}</li>
+        <ul class="thumb-list-a">
         </ul>
       </div>
     `;

@@ -5,27 +5,35 @@ const listItemTemplate = new ListItemTemplate();
 class ListItem {
 
   constructor() {
-    this.id = null;
+    this.index = null;
     this.containerNode = null;
     this.domNode = null;
     this.template = null;
+    this.photo = null;
   }
 
   init(data) {
     Object.assign(this, data);
+    // console.log(this);
     this.render();
   }
 
   render() {
     const context = {
-      name: 'list name & <> ""'
+      width: parseInt(this.photo['width_q'], 10),
+      height: parseInt(this.photo['height_q'], 10),
+      src: this.photo['url_q'],
+      description: this.photo['description']['_content'],
+      title: this.photo['title'],
+      index: this.index, 
+      id: this.photo['id']
     };
     this.template = listItemTemplate.renderTemplate(context);
-    this.containerNode.innerHTML = this.template;
+    // append list item to list
+    this.containerNode.insertAdjacentHTML('beforeend', this.template);
+    this.domNode = this.containerNode.querySelector(`.list-item[data-id="${this.photo.id}"]`);
     
-    // this.domNode = this.containerNode.querySelector('.list');
-    // this.domNode.id = this.id;
-    
+    // console.log(this.domNode);
     this.postRender();
   }
 

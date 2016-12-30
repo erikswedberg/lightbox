@@ -21,5 +21,15 @@ export default class Utility {
     }
     return s;
   }
+  
+  findClassInParents(el, className, limit) {
+    if (el.classList.contains(className)) return el; // the element
+    if (el === limit) return undefined;
+    if (el.parentNode) {
+      return this.findClassInParents(el.parentNode, className, limit); // a parent
+    }
+    return undefined; // not the element nor its parents
+  }
+  
 }
 
